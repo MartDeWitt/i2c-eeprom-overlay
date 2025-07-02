@@ -1,0 +1,20 @@
+Name:   i2c-eeprom
+
+Info:   Overlay for a number of I2C-EEPROMs on i2c-1
+
+Usage:  dtoverlay=i2c-eeprom,<param>=<val>
+
+Params: 
+	addr			Select the i2c-address for the device
+				(default 0x50)
+
+	at24c02		Select the AT24C02 device
+
+	at24c08		Select the AT24C08 device
+
+	at24c16		Select the AT24C15 device
+	
+	at24c32		Select the AT24C32 device
+	
+	at24c256		Select the AT24C256 device
+
