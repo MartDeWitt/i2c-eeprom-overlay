@@ -1,0 +1,103 @@
+/*
+ * DT-Overlay für I2C-EEPROM's
+ */
+
+/dts-v1/;
+/plugin/;
+
+/{
+        compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&i2c1>;
+		__dormant__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			
+			at24c02: at24@50 {
+				compatible = "atmel,24c02";
+				reg = <0x50>;
+				pagesize = <8>;
+				size = <256>;
+				address-width = <8>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&i2c1>;
+		__dormant__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			
+			at24c04: at24@50 {
+				compatible = "atmel,24c04";
+				reg = <0x50>;
+				pagesize = <16>;
+				size = <512>;
+				address-width = <16>;
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&i2c1>;
+		__dormant__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			
+			at24c08: at24@50 {
+				compatible = "atmel,24c08";
+				reg = <0x50>;
+				pagesize = <16>;
+				size = <1024>;
+				address-width = <16>;
+			};
+		};
+	};
+
+	fragment@3 {
+		target = <&i2c1>;
+		__dormant__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			
+			at24c16: at24@50 {
+				compatible = "atmel,24c16";
+				reg = <0x50>;
+				pagesize = <16>;
+				size = <2048>;
+				address-width = <16>;
+			};
+		};
+	};
+
+        fragment@4 {
+                target = <&i2c1>;
+                __dormant__ {
+                        #address-cells = <1>;
+                        #size-cells = <0>;
+
+                        at24c32: at24@50 {
+                                compatible = "atmel,24c32";
+                                reg = <0x50>;
+                                pagesize = <32>;
+				size = <4096>;
+                        };
+                };
+        };
+        
+        __overrides__ {
+		at24c02 = <0>,"+0";
+		at24c04 = <0>,"+1";
+		at24c08 = <0>,"+2";
+		at24c16 = <0>,"+3";
+		at24c32 = <0>,"+4";
+
+		addr = <&at24c02>, "reg:0",
+		       <&at24c04>, "reg:0",
+		       <&at24c08>, "reg:0",
+		       <&at24c16>, "reg:0",
+		       <&at24c32>, "reg:0";		
+        };
+};
