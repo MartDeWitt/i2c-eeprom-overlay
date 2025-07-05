@@ -1,41 +1,41 @@
 Name:   i2c-eeprom
 
-Info:   Overlay for a number of atmel at24 and compatible I2C-EEPROMs
+Info:   Overlay for a number of Atmel AT24 and compatible I2C-EEPROMs
 
 Usage:  dtoverlay=i2c-eeprom,<param>=<val>
 
-Params: addr		Select the i2c-address for the device
-					default: 0x50
+Params: addr        Select the i2c-address for the device
+                    default: 0x50
 
-		dev			Set compatible property, see note(1),
-					string, required
-		
-		pagesize	Set the length of the pagesize for writing. 
-					Permitted values: 1, 8, 16, 32, 64, 128 or 256.
-					default: 1 
-					See note(2)
+        dev         Set compatible property, see note(1),
+                    string, required
 
-		i2c-bus		Supports all the standard I2C bus selection
-					parameters - see "dtoverlay -h i2c-bus"
-					default: i2c1
+        pagesize    Set the length of the pagesize for writing. 
+                    Permitted values: 1, 8, 16, 32, 64, 128 or 256.
+                    default: 1 
+                    See note(2)
 
-		LABEL		add a descriptive name of the EEPROM
+        i2c-bus     Supports all the standard I2C bus selection
+                    parameters - see "dtoverlay -h i2c-bus"
+                    default: i2c1
 
-		wp			set write protection flag
-					default off
+        LABEL       add a descriptive name of the EEPROM
 
-		Example:
+        wp          set write protection flag
+                    default off
+
+        Example:
         dtoverlay=i2c-eeprom,type="atmel,24c32",addr=0x50,LABEL="score",i2c0
-		
-		note(1):
-		Only specification of one of the standard atmel,at24 models is
-		possible (and a few special cases). For supported models see bindings 
-		https://www.kernel.org/doc/Documentation/devicetree/bindings/
-		eeprom/at24.yaml
-		Alternatively, find compatible specifications for supported models 
-		under "alias of:..." using the output of the "modinfo at24" command.
+        
+        note(1):
+        Only one of the standard atmel,at24 models is possible (and a few 
+        special cases). For supported models see devicetree bindings 
+        https://www.kernel.org/doc/Documentation/devicetree/bindings/
+        eeprom/at24.yaml
+        Alternatively, find compatible specifications for supported models 
+        under "alias of:..." using the output of the "modinfo at24" command.
 
-		note(2):
-		An incorrect value for pagesize can lead to data loss! Consult the
-		datasheet of your device for correct pagesize. Setting the 
-		default value to '1' is a safety measure, but it is very slow.
+        note(2):
+        An incorrect value for pagesize can lead to data loss! Consult the
+        datasheet of your device for correct pagesize. Setting the 
+        default value to '1' is a safety measure, but it is very slow.

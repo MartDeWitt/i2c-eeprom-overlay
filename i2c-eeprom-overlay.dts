@@ -1,103 +1,34 @@
 /*
- * DT-Overlay für I2C-EEPROM's
+ * DT-Overlay für Atmel's AT24 und kompatible I2C-EEPROM's
  */
 
 /dts-v1/;
 /plugin/;
+/include/ "i2c-buses.dtsi"
 
 /{
-        compatible = "brcm,bcm2835";
+    compatible = "brcm,bcm2835";
 
-	fragment@0 {
-		target = <&i2c1>;
-		__dormant__ {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			
-			at24c02: at24@50 {
-				compatible = "atmel,24c02";
-				reg = <0x50>;
-				pagesize = <8>;
-				size = <256>;
-				address-width = <8>;
-			};
-		};
-	};
+    fragment@0 {
+        target = <&i2cbus>;
+        __overlay__{
+            #address-cells = <1>;
+            #size-cells = <0>;
+            status="okay";
 
-	fragment@1 {
-		target = <&i2c1>;
-		__dormant__ {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			
-			at24c04: at24@50 {
-				compatible = "atmel,24c04";
-				reg = <0x50>;
-				pagesize = <16>;
-				size = <512>;
-				address-width = <16>;
-			};
-		};
-	};
-
-	fragment@2 {
-		target = <&i2c1>;
-		__dormant__ {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			
-			at24c08: at24@50 {
-				compatible = "atmel,24c08";
-				reg = <0x50>;
-				pagesize = <16>;
-				size = <1024>;
-				address-width = <16>;
-			};
-		};
-	};
-
-	fragment@3 {
-		target = <&i2c1>;
-		__dormant__ {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			
-			at24c16: at24@50 {
-				compatible = "atmel,24c16";
-				reg = <0x50>;
-				pagesize = <16>;
-				size = <2048>;
-				address-width = <16>;
-			};
-		};
-	};
-
-        fragment@4 {
-                target = <&i2c1>;
-                __dormant__ {
-                        #address-cells = <1>;
-                        #size-cells = <0>;
-
-                        at24c32: at24@50 {
-                                compatible = "atmel,24c32";
-                                reg = <0x50>;
-                                pagesize = <32>;
-				size = <4096>;
-                        };
-                };
+            eeprom: eeprom@0 {
+                pagesize = <1>;
+                reg = <0x50>;
+                status="okay";
+            };
         };
-        
-        __overrides__ {
-		at24c02 = <0>,"+0";
-		at24c04 = <0>,"+1";
-		at24c08 = <0>,"+2";
-		at24c16 = <0>,"+3";
-		at24c32 = <0>,"+4";
-
-		addr = <&at24c02>, "reg:0",
-		       <&at24c04>, "reg:0",
-		       <&at24c08>, "reg:0",
-		       <&at24c16>, "reg:0",
-		       <&at24c32>, "reg:0";		
-        };
+    };
+    
+    __overrides__ {
+    type = <&eeprom>, "compatible";
+    addr = <&eeprom>, "reg:0";
+    pagesize = <&eeprom>,"pagesize:0";
+    LABEL = <&eeprom>, "label";
+    wp = <&eeprom>,"read-only?";
+    };
 };
