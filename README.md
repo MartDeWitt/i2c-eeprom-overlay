@@ -1,5 +1,5 @@
 # i2c-eeprom-overlay
-Raspberry Pi DT-Overlay für verschiedene i2c-EEPROMs
+Raspberry Pi DT-Overlay für verschiedene Atmel AT24 und kompatible i2c-EEPROMs
 
 übersetzen mit: `dtc -@ -I dts -O dtb -o i2c-eeprom.dtbo i2c-eeprom-overlay.dts`
 Der Aufruf gibt 2 Warnmeldungen aus, die ignoriert werden können.
