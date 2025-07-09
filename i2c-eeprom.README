@@ -7,7 +7,7 @@ Usage:  dtoverlay=i2c-eeprom,<param>=<val>
 Params: addr        Select the i2c-address for the device
                     default: 0x50
 
-        type        Set compatible property, see note(1),
+        dev         Set compatible property, see note(1),
                     string, required
 
         pagesize    Set the length of the pagesize for writing. 
@@ -19,13 +19,11 @@ Params: addr        Select the i2c-address for the device
                     parameters - see "dtoverlay -h i2c-bus"
                     default: i2c1
 
-        LABEL       add a descriptive name of the EEPROM
-
         wp          set write protection flag
-                    default off
+                    boolean, default off
 
         Example:
-        dtoverlay=i2c-eeprom,type="atmel,24c32",addr=0x50,LABEL="score",i2c0
+        dtoverlay=i2c-eeprom,type="atmel,24c32",addr=0x50,i2c0
         
         note(1):
         Only one of the standard atmel,at24 models is possible (and a few 

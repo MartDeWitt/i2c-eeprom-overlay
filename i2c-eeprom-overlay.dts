@@ -18,6 +18,7 @@
 
             eeprom: eeprom@0 {
                 pagesize = <1>;
+                num-addresses = <1>;
                 reg = <0x50>;
                 status="okay";
             };
@@ -28,7 +29,6 @@
     type = <&eeprom>, "compatible";
     addr = <&eeprom>, "reg:0";
     pagesize = <&eeprom>,"pagesize:0";
-    LABEL = <&eeprom>, "label";
     wp = <&eeprom>,"read-only?";
     };
 };
