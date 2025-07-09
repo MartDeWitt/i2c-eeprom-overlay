@@ -1,8 +1,7 @@
 # i2c-eeprom-overlay
 Raspberry Pi DT-Overlay für verschiedene Atmel AT24 und kompatible i2c-EEPROMs
 
-übersetzen mit: `dtc -@ -I dts -O dtb -o i2c-eeprom.dtbo i2c-eeprom-overlay.dts`
-Der Aufruf gibt 2 Warnmeldungen aus, die ignoriert werden können.
+übersetzen mit: `dtc -@ -Hepapr -W no-unit_address_vs_reg -I dts -O dtb -o i2c-eeprom.dtbo i2c-eeprom-overlay.dts`
 
 Der EEPROM liegt dann als Datei unter `/sys/bus/i2c/devices/$BUS-00$ADDR/eeprom`
 wobei BUS die i2c Busnummer und ADDR die i2c Adresse des EEPROM ist.
