@@ -7,7 +7,7 @@ Usage:  dtoverlay=i2c-eeprom,<param>=<val>
 Params: addr        Select the i2c-address for the device
                     default: 0x50
 
-        dev         Set compatible property, see note(1),
+        type        Set compatible property, see note(1),
                     string, required
 
         pagesize    Set the length of the pagesize for writing. 
